@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: quantum-number
+  name: quantum-number
+spec:
+  containers:
+  - image: localhost:5000/rand-num-image
+    name: quantum-number
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}

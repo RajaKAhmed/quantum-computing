@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: get-num-pod
+  namespace: qrng
+spec:
+  containers:
+  - args:
+    - i=0; while i=$((i+1)); do echo Hello from Class $i; sleep 5; done
+    command:
+    - /bin/bash
+    - -c
+    - --
+    image: nginx:latest
+    imagePullPolicy: Always
+    name: get-num-pod
+    volumeMounts:
+    - mountPath: /rando
+      name: qrng-volume
+  volumes:
+  - name: qrng-volume
+    hostPath:
+      # directory location on host
+      path: /home/u5612/k8sdata
+      # this field is optional
+ 

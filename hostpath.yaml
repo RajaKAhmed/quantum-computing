@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rando
+spec:
+  containers:
+  - image: localhost:5000/rand-num-image
+    name: rando
+    volumeMounts:
+    - mountPath: /rando
+      name: qrng-volume
+  volumes:
+  - name: qrng-volume
+    hostPath:
+      # directory location on host
+      path: /home/u5612/k8sdata
+      # this field is optional
+   

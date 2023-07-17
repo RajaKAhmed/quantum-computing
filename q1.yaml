@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"name":"get-num-pod","namespace":"qrng"},"spec":{"containers":[{"args":["i=0; while i=$((i+1)); do echo Hello from Class $i; sleep 5; done"],"command":["/bin/bash","-c","--"],"image":"nginx:latest","imagePullPolicy":"Always","name":"get-num-pod","volumeMounts":[{"mountPath":"/rando","name":"qrng-volume"}]}],"volumes":[{"hostPath":{"path":"/home/u5612/k8sdata"},"name":"qrng-volume"}]}}
+  creationTimestamp: "2022-05-15T14:18:41Z"
+  name: get-num-pod
+  namespace: qrng
+  resourceVersion: "4257342"
+  uid: a55c5728-f507-4d25-9077-8c08026fea68
+spec:
+  containers:
+  - args:
+    - i=0; while i=$((i+1)); do echo Hello from Class $i; sleep 5; done
+    command:
+    - /bin/bash
+    - -c
+    - --
+    image: nginx:latest
+    imagePullPolicy: Always
+    name: get-num-pod
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /rando
+      name: qrng-volume
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-622gv
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: docker-desktop
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /home/u5612/k8sdata
+      type: ""
+    name: qrng-volume
+  - name: kube-api-access-622gv
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2022-05-15T14:18:41Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2022-05-15T14:18:43Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2022-05-15T14:18:43Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2022-05-15T14:18:41Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://3461cd8f552392288a481bc9828bfd386b095a7d5a6d2659131005096ccd2320
+    image: nginx:latest
+    imageID: docker-pullable://nginx@sha256:2c72b42c3679c1c819d46296c4e79e69b2616fa28bea92e61d358980e18c9751
+    lastState: {}
+    name: get-num-pod
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2022-05-15T14:18:42Z"
+  hostIP: 192.168.65.4
+  phase: Running
+  podIP: 10.1.3.92
+  podIPs:
+  - ip: 10.1.3.92
+  qosClass: BestEffort
+  startTime: "2022-05-15T14:18:41Z"

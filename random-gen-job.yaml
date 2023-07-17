@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: spitnumber
+spec:
+  schedule: "*/5 * * * *"
+ #schedule: "m h dm m dw " dm = day of month 1-31 dw= (0-6) Sun-Sat
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: spitnumber
+            image: localhost:5000/rand-num-image
+            #imagePullPolicy: IfNotPresent
+            #command:
+            #- /bin/sh
+            #- -c
+            #- date; echo Hello from the Kubernetes cluster
+          restartPolicy: OnFailure
